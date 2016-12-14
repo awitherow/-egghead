@@ -3,31 +3,35 @@
 const { graphql, buildSchema } = require('graphql')
 
 const schema = buildSchema(`
-  type Query {
+  type Video {
     id: ID,
     title: String,
     duration: Int,
     watched: Boolean
   }
 
-  type Schema {
-    query: Query
+  type Query {
+    video: Video
   }
 `)
 
 const resolvers = {
-  id: () => 1,
-  title: () => 'bar',
-  duration: () => 180,
-  watched: () => true 
+  video: {
+    id: 1,
+    title: 'bar',
+    duration: 180,
+    watched: true
+  }
 }
 
 const query = `
   query myFirstQuery {
-    id
-    title
-    duration
-    watched
+    video {
+      id,
+      title,
+      duration,
+      watched
+    }
   }
 `
 graphql(schema, query, resolvers).then(

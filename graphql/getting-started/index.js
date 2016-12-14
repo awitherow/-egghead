@@ -1,56 +1,68 @@
 'use strict'
 
-const { graphql, buildSchema } = require('graphql')
+const {
+  GraphQLSchema,
+  GraphQLObjectType,
+  GraphQLString,
+  GraphQLInt,
+  GraphQLBoolean,
+  GraphQLID
+} = require('graphql')
+
 const express = require('express')
 const graphqlHTTP = require('express-graphql')
 
 const PORT = process.env.PORT || 3000
 const server = express()
 
-const schema = buildSchema(`
-  type Video {
-    id: ID,
-    title: String,
-    duration: Int,
-    watched: Boolean
+const videoType = new GraphQLObjectType({
+  name: 'Video',
+  description: 'a video on egghead.io',
+  fields: {
+    id: {
+      type: GraphQLID,
+      description: 'the ID of the video'
+    },
+    title: {
+      type: GraphQLString,
+      description: 'title of the video'
+    },
+    duration: {
+      type: GraphQLInt,
+      description: 'the length of the video'
+    },
+    watched: {
+      type: GraphQLBoolean,
+      description: 'has the user watched the video?'
+    },
   }
+})
 
-  type Query {
-    video: Video
-    videos: [Video]
+const queryType = new GraphQLObjectType({
+  name: 'QueryType',
+  description: 'the root query type',
+  fields: {
+    video: {
+      type: videoType,
+      resolve: () => new Promise(resolve => {
+        resolve({
+          id: 'a',
+          title: 'Create a GraphQL server',
+          duration: 180,
+          watched: true,
+        })
+      })
+    }
   }
-`)
+})
 
-const videoA = {
-  id: 1,
-  title: 'first video',
-  duration: 180,
-  watched: true
-}
-
-const videoB = {
-  id: 2,
-  title: 'second video',
-  duration: 180,
-  watched: true
-}
-
-const videos = [videoA, videoB]
-
-const resolvers = {
-  video: {
-    id: 1,
-    title: 'bar',
-    duration: 180,
-    watched: true
-  },
-  videos: () => videos
-}
+const schema = new GraphQLSchema({
+  query: queryType
+})
 
 server.use('/graphql', graphqlHTTP({
   schema,
-  graphiql: true,
-  rootValue: resolvers
+  graphiql: true
 }))
 
 server.listen(PORT, () => console.log(`listening on localhost:${PORT}`))

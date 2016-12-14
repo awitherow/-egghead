@@ -12,6 +12,8 @@ const {
 const express = require('express')
 const graphqlHTTP = require('express-graphql')
 
+const { getVideoById } = require('./src/data')
+
 const PORT = process.env.PORT || 3000
 const server = express()
 
@@ -44,14 +46,13 @@ const queryType = new GraphQLObjectType({
   fields: {
     video: {
       type: videoType,
-      resolve: () => new Promise(resolve => {
-        resolve({
-          id: 'a',
-          title: 'Create a GraphQL server',
-          duration: 180,
-          watched: true,
-        })
-      })
+      args: {
+        id: {
+          type: GraphQLID,
+          description: 'id of the video'
+        }
+      },
+      resolve: (_, args) => getVideoById(args.id)
     }
   }
 })

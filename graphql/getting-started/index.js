@@ -3,6 +3,7 @@
 const {
   GraphQLSchema,
   GraphQLObjectType,
+  GraphQLNonNull,
   GraphQLString,
   GraphQLInt,
   GraphQLBoolean,
@@ -48,7 +49,7 @@ const queryType = new GraphQLObjectType({
       type: videoType,
       args: {
         id: {
-          type: GraphQLID,
+          type: new GraphQLNonNull(GraphQLID),
           description: 'id of the video'
         }
       },

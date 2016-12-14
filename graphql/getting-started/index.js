@@ -12,6 +12,8 @@ const {
   GraphQLID
 } = require('graphql')
 
+const nodeInterface = require('./src/node')
+
 const express = require('express')
 const graphqlHTTP = require('express-graphql')
 
@@ -25,7 +27,7 @@ const videoType = new GraphQLObjectType({
   description: 'a video on egghead.io',
   fields: {
     id: {
-      type: GraphQLID,
+      type: new GraphQLNonNull(GraphQLID),
       description: 'the ID of the video'
     },
     title: {
@@ -40,8 +42,10 @@ const videoType = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: 'has the user released the video?'
     },
-  }
+  },
+  interfaces: [nodeInterface]
 })
+exports.videoType = videoType
 
 const queryType = new GraphQLObjectType({
   name: 'QueryType',

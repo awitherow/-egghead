@@ -3,6 +3,7 @@
 const {
   GraphQLSchema,
   GraphQLObjectType,
+  GraphQLInputObjectType,
   GraphQLList,
   GraphQLNonNull,
   GraphQLString,
@@ -63,6 +64,24 @@ const queryType = new GraphQLObjectType({
   }
 })
 
+const videoInputType = new GraphQLInputObjectType({
+  name: 'VideoInput',
+  fields: {
+    title: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'title of the video'
+    },
+    duration: {
+      type: new GraphQLNonNull(GraphQLInt),
+      description: 'the length of the video'
+    },
+    released: {
+      type: new GraphQLNonNull(GraphQLBoolean),
+      description: 'has the user released the video?'
+    },
+  }
+})
+
 const mutationType = new GraphQLObjectType({
   name: 'Mutation',
   description: 'root mutation type',
@@ -70,20 +89,11 @@ const mutationType = new GraphQLObjectType({
     createVideo: {
       type: videoType,
       args: {
-        title: {
-          type: new GraphQLNonNull(GraphQLString),
-          description: 'title of the video'
-        },
-        duration: {
-          type: new GraphQLNonNull(GraphQLInt),
-          description: 'the length of the video'
-        },
-        released: {
-          type: new GraphQLNonNull(GraphQLBoolean),
-          description: 'has the user released the video?'
-        },
+        video: {
+          type: new GraphQLNonNull(videoInputType)
+        }
       },
-      resolve: (_, args) => createVideo(args)
+      resolve: (_, args) => createVideo(args.video)
     }
   }
 })

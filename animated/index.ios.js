@@ -1,31 +1,44 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  Animated,
+  Easing,
 } from 'react-native';
 
 export default class animated extends Component {
+  componentWillMount() {
+    this.animatedDimensionVal = new Animated.Value(100);
+    this.animatedOpacityVal = new Animated.Value(1);
+  }
+
+  componentDidMount() {
+    Animated.timing(this.animatedDimensionVal, {
+      toValue: 150,
+      duration: 3000,
+      easing: Easing.bounce,
+    }).start()
+
+    Animated.timing(this.animatedOpacityVal, {
+      toValue: 0.3,
+      duration: 3000,
+      easing: Easing.bounce,
+    }).start()
+  }
+
   render() {
+    const animatedStyle = {
+      opacity: this.animatedOpacityVal,
+      height: this.animatedDimensionVal,
+      width: this.animatedDimensionVal,
+    }
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
+        <Animated.View
+          style={[animatedStyle, styles.box]}
+        />
       </View>
     );
   }
@@ -38,15 +51,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  box: {
+    backgroundColor: '#333',
   },
 });
 

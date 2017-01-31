@@ -1,59 +1,17 @@
 import React, { Component } from 'react';
 import {
   AppRegistry,
-  StyleSheet,
-  Text,
-  View,
-  Animated,
-  Easing,
 } from 'react-native';
 
-export default class animated extends Component {
-  componentWillMount() {
-    this.animatedDimensionVal = new Animated.Value(100);
-    this.animatedOpacityVal = new Animated.Value(1);
-  }
+import ListViewPrototype from './src/list-view-prototype'
 
-  componentDidMount() {
-    Animated.timing(this.animatedDimensionVal, {
-      toValue: 150,
-      duration: 3000,
-      easing: Easing.bounce,
-    }).start()
-
-    Animated.timing(this.animatedOpacityVal, {
-      toValue: 0.3,
-      duration: 3000,
-      easing: Easing.bounce,
-    }).start()
-  }
-
+export default class App extends Component {
   render() {
-    const animatedStyle = {
-      opacity: this.animatedOpacityVal,
-      height: this.animatedDimensionVal,
-      width: this.animatedDimensionVal,
-    }
     return (
-      <View style={styles.container}>
-        <Animated.View
-          style={[animatedStyle, styles.box]}
-        />
-      </View>
-    );
+      <ListViewPrototype
+        list={['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']}/>
+      )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  box: {
-    backgroundColor: '#333',
-  },
-});
-
-AppRegistry.registerComponent('animated', () => animated);
+AppRegistry.registerComponent('animated', () => App);

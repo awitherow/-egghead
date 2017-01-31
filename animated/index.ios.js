@@ -5,11 +5,25 @@ import {
 
 import ListViewPrototype from './src/list-view-prototype'
 
+function getColor() {
+  return '#' + Math.random().toString(16).slice(2, 8).toUpperCase();
+}
+
 export default class App extends Component {
   render() {
     return (
       <ListViewPrototype
-        list={['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']}/>
+        list={[
+          { id: '0', color: getColor()},
+          { id: '1', color: getColor()},
+          { id: '2', color: getColor()},
+          { id: '3', color: getColor()},
+          { id: '4', color: getColor()},
+          { id: '5', color: getColor()},
+          { id: '6', color: getColor()},
+          { id: '7', color: getColor()},
+          { id: '8', color: getColor()},
+          { id: '9', color: getColor()}]}/>
       )
   }
 }

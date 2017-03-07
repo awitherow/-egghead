@@ -18,12 +18,11 @@ export default class MyComponent extends Component {
     this.rowsChanged = this.rowsChanged.bind(this)
     this.handleScroll = this.handleScroll.bind(this)
 
-    // default height: 100
-    // max height: 200
-    // grow distance = max - default
+    this.growDistance = props.maxHeight - props.minHeight
   }
 
   rowsChanged(visibleRows, changedRows) {
+
     this.setState({
       featuredRow: Object.keys(visibleRows.s1)[1],
     })
@@ -35,28 +34,43 @@ export default class MyComponent extends Component {
   }
 
   handleScroll(event) {
+    const { minHeight } = this.props
+    const percentageOffSet = (event.nativeEvent.contentOffset.y % minHeight / 100)
+    if (percentageOffSet < 0) {
+      return
+    }
     this.setState({
-      percentageOffSet: (event.nativeEvent.contentOffset.y % 100 / 100),
+      percentageOffSet,
     })
   }
 
   render() {
+    const { percentageOffSet, featuredRow, dataSource } = this.state;
+    const { minHeight } = this.props;
+
     return (
       <ListView
-        dataSource={this.state.dataSource}
+        dataSource={dataSource}
         onScroll={this.handleScroll}
         onChangeVisibleRows={this.rowsChanged}
-        renderRow={(rowData) => <View style={{
-          height: rowData.id === this.state.featuredRow ?
-            (this.state.percentageOffSet * 100) + 100 : 100,
-          paddingTop: rowData.id === this.state.featuredRow ? -(this.state.percentageOffSet * 100) : 0,
-          flex: 1,
-          alignItems: 'center',
-          justifyContent: 'center',
-          backgroundColor: rowData.color,
-        }}>
-          <Text>{rowData.id}</Text>
-        </View>}
+        renderRow={(rowData) => {
+          const isFeatRow = rowData.id === featuredRow;
+          const growthPercent = -(percentageOffSet * this.growDistance);
+
+          return (
+            <View style={{
+              height: isFeatRow ? growthPercent + minHeight : minHeight,
+              // paddingTop: isFeatRow ? -(percentageOffSet * minHeight) : 0,
+              zIndex: isFeatRow ? 2 : 1,
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: rowData.color,
+            }}>
+              <Text>{rowData.id}</Text>
+            </View>
+          )
+        }}
       />
     );
   }

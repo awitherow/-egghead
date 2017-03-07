@@ -13,6 +13,8 @@ export default class App extends Component {
   render() {
     return (
       <ListViewPrototype
+        minHeight={100}
+        maxHeight={200}
         list={[
           { id: '0', color: getColor()},
           { id: '1', color: getColor()},

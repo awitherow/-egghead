@@ -50,3 +50,28 @@ Docker images are sort of a template that can be started which will create envir
 
 Tech start up based in San Fran. Started as dotCloud, SaaS around AWS.
 
+They're the stewards of the docker project.
+
+The Open Container Initiative strives to create a strong ecosystem and standards for templating container images.
+
+### Differences between Stateful and Stateless applications and Docker
+
+Docker can handle both Stateful situations as well as Stateless ones, but it excells at handling Stateless situations.
+
+#### Stateless
+
+Does not remember anything, only executes its task at hand.
+
+#### Stateful
+
+Remembers your history.
+
+Docker persist data by default! No need to worry.
+
+### Dockerhub
+
+A registry is similar to a bank for supported templates.
+
+### Orchestration
+
+Proper container orchestration enables deployment and scaling on a nice level. This will be expanded upon in later modules.

@@ -3,9 +3,14 @@ require('es6-promise');
 'use strict';
 
 var promise = new Promise(function (fulfill, reject) {
-  setTimeout(function() { fulfill('FULFILLED!');}, 300);
+  setTimeout(function() { 
+    reject(new Error('REJECTED!'));
+  }, 300);
+}).then(null, function(err) {
+  onReject(err);
 });
 
-promise.then(function(res) {
-  console.log(res);
-});
+function onReject(error) {
+  console.log(error.message);
+}
+

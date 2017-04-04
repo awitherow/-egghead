@@ -1,17 +1,13 @@
 require('es6-promise');
 
-'use strict';
+('use strict');
 
-var promise = new Promise(function (fulfill, reject) {
-  fulfill('I FIRED');
-  reject(new Error('I DID NOT FIRE'));
-  
-}).then(function(success) {
-  console.log(success);
-}, function(err) {
-  onRejected(err);
+var promise = new Promise(function(fulfill, reject) {
+    fulfill('PROMISE VALUE');
 });
 
-function onRejected(error) {
-  console.log(error.message);
-}
+// gets called second, event loop must first finish.
+promise.then(console.log);
+
+// gets called first.
+console.log('MAIN PROGRAM');

@@ -21,3 +21,8 @@ Once fulfilled, or rejected, the opposite action cannot be taken.
 
 You can expect that the functions passed to the then method of a
 promise will be called on the next turn of the event loop.
+
+## dev friendly promises
+
+Rejections can be caught with the `.catch()` chain.
+

@@ -2,12 +2,14 @@ require('es6-promise');
 
 ('use strict');
 
-function attachTitle(word) {
-    return 'DR. ' + word;
+function parsePromised(json) {
+    return new Promise(function(fulfill, reject) {
+        try {
+            fulfill(JSON.parse(json));
+        } catch (e) {
+            reject(e);
+        }
+    });
 }
 
-var manhattan = new Promise(function(fulfill, reject) {
-    fulfill('MANHATTAN');
-})
-    .then(attachTitle)
-    .then(console.log);
+parsePromised(process.argv[2]).then(null, console.log);

@@ -2,4 +2,12 @@ require('es6-promise');
 
 ('use strict');
 
-first().then(second).then(console.log);
+function attachTitle(word) {
+    return 'DR. ' + word;
+}
+
+var manhattan = new Promise(function(fulfill, reject) {
+    fulfill('MANHATTAN');
+})
+    .then(attachTitle)
+    .then(console.log);

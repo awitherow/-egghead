@@ -37,7 +37,7 @@ If our regression model is significant, it will "eat up" much of the raw SSE we 
 
 ### visual example
 
-![tips for service visual](https://github.com/awitherow/learning/blob/master/coursera/week-1/img/tips-for-service.jpg?raw=true)
+![tips for service visual](https://github.com/awitherow/learning/blob/master/coursera/machine-learning/week-1/img/tips-for-service.jpg?raw=true)
 
 ## Review
 

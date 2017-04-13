@@ -35,6 +35,10 @@ The goal of simple linear regression is to create a linear model that minimizes 
 
 If our regression model is significant, it will "eat up" much of the raw SSE we had when we assumed (like this problem) that the independent variable did not even exist. The regression line will/should literally "fit" the data better. It will minimize the residuals.
 
+### visual example
+
+![tips for service visual](https://github.com/awitherow/learning/blob/master/coursera/week-1/img/tips-for-service.jpg?raw=true)
+
 ## Review
 
 - Simple linear regression is a comparison of two models

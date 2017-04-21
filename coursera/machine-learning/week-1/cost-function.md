@@ -64,7 +64,11 @@ Each of these terms is equal to 0 due to the fact that in our training set, all 
 
 Therefore `J(1) = 0`.
 
+![Image of J(1)](https://raw.githubusercontent.com/awitherow/learning/master/coursera/machine-learning/week-1/img/j1.jpg)
+
 When h of x is set to something like 0.5, we then have something similar to the example below.
+
+![Image of J(0.5)](https://raw.githubusercontent.com/awitherow/learning/master/coursera/machine-learning/week-1/img/j0.5.jpg)
 
 As you can see, there are gaps between the line (h<sub>Θ</sub>(x)) and the y<sup>(i)</sup> values.
 
@@ -79,6 +83,8 @@ The equation above simplifies to 1/(2*3) *  3.5/1 = 3.5/6 = around 0.58.
 ### problem #1
 
 Supposed we have a training set with m=3, how do we find J(0)?
+
+![Image of problem one solution](https://raw.githubusercontent.com/awitherow/learning/master/coursera/machine-learning/week-1/img/cost-ex-1.jpg)
 
 ### problem #1, further explaination of examples above
 
@@ -98,14 +104,14 @@ If we try to think of it in visual terms, our training data set is scattered on 
 
 Our objective is to get the best possible line. The best possible line will be such so that the average squared vertical distances of the scattered points from the line will be the least. Ideally, the line should pass through all the points of our training data set. In such a case, the value of J(θ0,θ1) will be 0. The following example shows the ideal situation where we have a cost function of 0.
 
-![Image of Lecture notes](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/_B8TJZtREea33w76dwnDIg_3e3d4433e32478f8df446d0b6da26c27_Screenshot-2016-10-26-00.57.56.png?expiry=1492905600000&hmac=OQ95OwrwAnaRa2ygmdzd0TzwRmVYnj20Jw_VnmuBBE0)
+![Image of Lecture notes](https://raw.githubusercontent.com/awitherow/learning/master/coursera/machine-learning/week-1/img/cost-i-1.png)
 
 When θ1=1, we get a slope of 1 which goes through every single data point in our model. Conversely, when θ1=0.5, we see the vertical distance from our fit to the data points increase.
 
-![Image of Lecture notes](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/8guexptSEeanbxIMvDC87g_3d86874dfd37b8e3c53c9f6cfa94676c_Screenshot-2016-10-26-01.03.07.png?expiry=1492905600000&hmac=Hjyih4rUIsVDKwygWhbPCFStv5Q9Lh7YBX375J9MmqE)
+![Image of Lecture notes](https://raw.githubusercontent.com/awitherow/learning/master/coursera/machine-learning/week-1/img/cost-i-2.png)
 
 This increases our cost function to 0.58. Plotting several other points yields to the following graph:
 
-![Image of Lecture notes](https://d3c33hcgiwev3.cloudfront.net/imageAssetProxy.v1/fph0S5tTEeajtg5TyD0vYA_9b28bdfeb34b2d4914d0b64903735cf1_Screenshot-2016-10-26-01.09.05.png?expiry=1492905600000&hmac=BTLnqMJKV2sfySI6zQECzFLNVxsmBGKeyOm-uogy9dc)
+![Image of Lecture notes](https://raw.githubusercontent.com/awitherow/learning/master/coursera/machine-learning/week-1/img/cost-i-3.png)
 
 Thus as a goal, we should try to minimize the cost function. In this case, θ1=1 is our global minimum.
